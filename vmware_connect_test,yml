@@ -1,5 +1,4 @@
 ---
-
 - name: vmware-con-test
   hosts: localhost 
   gather_facts: false 
