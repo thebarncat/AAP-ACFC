@@ -1,0 +1,21 @@
+---
+- name: provison linux vm
+  hosts: localhost
+  become: false
+  gather_facts: false
+  
+  tasks:
+    - name: create vm from template
+      community.vmware.vmware_guest
+        datacenter: "{{ dc }}"
+        name: "{{ vm_name }}"
+        template: "{{ template_path }}"
+        cluster: "{{ cluster_name }}"
+        folder: "{{ folder }}"
+        state: "present"
+        
+        
+        
+        
+        
+ 
