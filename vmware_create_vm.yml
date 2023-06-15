@@ -12,7 +12,7 @@
         template: "{{ template }}"
         cluster: "{{ cluster_name }}"
         folder: "{{ folder }}"
-        state: "present"
+        state: "{{ vm_state }}"
         
         
         
