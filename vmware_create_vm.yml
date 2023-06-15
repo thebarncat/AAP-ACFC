@@ -9,7 +9,7 @@
       community.vmware.vmware_guest:
         datacenter: "{{ dc }}"
         name: "{{ vm_name }}"
-        template: "{{ template_path }}"
+        template: "{{ template }}"
         cluster: "{{ cluster_name }}"
         folder: "{{ folder }}"
         state: "present"
