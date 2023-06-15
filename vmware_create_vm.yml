@@ -6,7 +6,7 @@
   
   tasks:
     - name: create vm from template
-      community.vmware.vmware_guest
+      community.vmware.vmware_guest:
         datacenter: "{{ dc }}"
         name: "{{ vm_name }}"
         template: "{{ template_path }}"
