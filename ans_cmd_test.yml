@@ -1,0 +1,8 @@
+---
+- name: touch a file
+  hosts: all
+  tasks: 
+    - name: gen file tmp
+      ansible.builtin.copy: 
+        content: '# This file was moved to /etc/other.conf'
+        dest: /tmp/hello.txt
