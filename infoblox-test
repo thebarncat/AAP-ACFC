@@ -1,0 +1,26 @@
+---
+- name: Configure Infoblox Objects
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Display networkview objects
+      ansible.builtin.debug:
+        msg: "{{ lookup('infoblox.nios_modules.nios_lookup', 'networkview') }}"
+
+    # - name: Get next IP
+    #   ansible.builtin.set_fact:
+    #     ipaddr: "{{ lookup('infoblox.nios_modules.nios_next_ip', '192.168.11.0/24') }}"
+    
+    - name: Create A record
+      infoblox.nios_modules.nios_a_record:
+        name: foo.example.com
+        ipv4: "{{ ipaddr }}"
+        state: present
+        provider: {}
+      register: a_record
+
+    - name: Print A Record
+      ansible.builtin.debug:
+        var: a_record
