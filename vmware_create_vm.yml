@@ -13,6 +13,7 @@
         cluster: "{{ cluster_name }}"
         folder: "{{ folder }}"
         state: "{{ vm_state }}"
+        networks: "{{ vm_networks }}"
         
         
         
