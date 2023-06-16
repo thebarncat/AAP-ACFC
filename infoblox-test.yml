@@ -15,7 +15,7 @@
     
     - name: Create A record
       infoblox.nios_modules.nios_a_record:
-        name: foo.example.com
+        name: "{{ a_rec_name }}"
         ipv4: "{{ ipaddr }}"
         state: present
         provider: {}
