@@ -16,8 +16,8 @@
         networks: "{{ vm_networks }}"
         hardware: 
           memory_mb: 8192
-          num_cpus: 4
-          num_cpu_cores_per_socket: 1
+          num_cpus: 1
+          num_cpu_cores_per_socket: 4
         datastore: CGVPUR701A1-NP-NRPL-VVOLS
         disk:
         - size_gb: 10
