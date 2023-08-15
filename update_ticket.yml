@@ -1,6 +1,6 @@
 ---
 - name: Update Ivanti ticket
-  hosts: localhost
+  hosts: all
   become: false
 
   vars:
@@ -27,7 +27,7 @@
         validate_certs: false
         url: https://cgvd1lansau002.kmhp.com/api/v2/job_templates/18/launch/
         url_username: admin
-        url_password: redhat
+        url_password: ansible
         status_code: [200, 201]
 
     - name: Print api call return contents as variable
