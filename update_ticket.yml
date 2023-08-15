@@ -25,7 +25,7 @@
         return_content: true
         timeout: 30
         validate_certs: false
-        url: https://aap2/api/v2/job_templates/14/launch/
+        url: https://cgvd1lansau002.kmhp.com/api/v2/job_templates/18/launch/
         url_username: admin
         url_password: redhat
         status_code: [200, 201]
