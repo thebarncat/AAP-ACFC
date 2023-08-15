@@ -1,0 +1,20 @@
+---
+- name: Write request to file system
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ensure /tmp/requests directory exists
+      ansible.builtin.file:
+        path: /tmp/requests
+        state: directory
+        owner: root
+        group: root
+
+    - name: Ensure contents are written to file system
+      ansible.builtin.copy:
+        content: "{{ request_details }}"
+        dest: "/tmp/requests/{{request_details.request_recid}}.json"
+        owner: root
+        group: root
+        mode: 0644

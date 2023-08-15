@@ -1,0 +1,35 @@
+---
+- name: Update Ivanti ticket
+  hosts: localhost
+  become: false
+
+  vars:
+    request_recid: 54321
+
+  tasks:
+    - name: Update Ivanti ticket with completed status
+      register: content
+      ansible.builtin.uri:
+        body:
+          extra_vars:
+            request_details:
+              request_recid: "{{ request_recid }}"
+              status: Completed
+        body_format: json
+        force_basic_auth: true
+        #creates: "/tmp/tickets/{{ request_recid }}.json"
+        #group: root
+        method: POST
+        #mode: 0644
+        #owner: root
+        return_content: true
+        timeout: 30
+        validate_certs: false
+        url: https://aap2/api/v2/job_templates/14/launch/
+        url_username: admin
+        url_password: redhat
+        status_code: [200, 201]
+
+    - name: Print api call return contents as variable
+      ansible.builtin.debug:
+        msg: "{{ content }}"
