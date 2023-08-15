@@ -1,0 +1,39 @@
+{
+    "extra_vars":
+        "{
+            \"input_install_splunk\":\"no\",
+            \"@version\":\"1\",
+            \"input_linux_patching_reboot_window\":\"NON-PROD-WINDOW1\",
+            \"input_os\":\"RHEL 8\",
+            \"input_application_name\":\"DataStage\",
+            \"input_vm_application_or_function_code\":\"dts\",
+            \"input_email_notification_recipient_list\":\"sfennal@amerihealthcaritas.com\",
+            \"@timestamp\":\"2023-08-04T20:29:12.026Z\",
+            \"input_vm_environment\":\"q1 - QA\",
+            \"input_centrify_environment\":\"qa\",
+            \"headers\":
+                {
+                    \"x_forwarded_proto\":\"https\",
+                    \"x_message_id\":\"bd498e05-3d76-2cdd-baa4-5a17cc99c40b\",
+                    \"request_method\":\"POST\",
+                    \"content_length\":\"675\",
+                    \"http_user_agent\":\"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.17763.3770\",
+                    \"http_accept\":\"application/json\",
+                    \"x_forwarded_port\":\"9451\",
+                    \"content_type\":\"application/json\",
+                    \"http_host\":\"cgvprlsltap001\",
+                    \"x_forwarded_for\":\"10.146.15.253\",
+                    \"request_path\":\"/\",
+                    \"http_version\":\"HTTP/1.1\"
+                },
+            \"input_catalog_names\":\"Deploy RHEL 8 in Non-Prod\",
+            \"input_centrify_application_name\":\"DataStage\",
+            \"input_cpu\":\"4\",
+            \"request_recid\":\"A1F3CE3ECD13457B8BBFE5F342D51E75\",
+            \"host\":\"10.150.64.62\",
+            \"request_number\":\"742600\",
+            \"input_memory_size_in_gb\":\"32\",
+            \"input_backup_tag\":\"bkup-nonprod-os\",
+            \"input_vm_purpose\":\"mt - Metadata Server\"
+        }"
+}
