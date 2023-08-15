@@ -1,0 +1,38 @@
+---
+- name: Generate hostname from input parameters
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Generate windows host name var and stat
+      when: input_os.find('Windows') != -1
+      block:
+
+        - name: Generate windows hostname and save as stat
+          ansible.builtin.set_stats:
+            aggregate: true
+            data:
+              my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}w{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}001"
+
+        - name: Generate windows hostname and save as variable
+          ansible.builtin.set_fact:
+            my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}w{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}001"
+
+    - name: Generate linux host name var and stat
+      when: input_os.find('RHEL') != -1
+      block:
+
+        - name: Generate linux hostname and save as stat
+          ansible.builtin.set_stats:
+            aggregate: true
+            data:
+              my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}l{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}001"
+
+        - name: Generate linux hostname and save as variable
+          ansible.builtin.set_fact:
+            my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}l{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}001"
+        
+    - name: Test if my_hostname_base exists
+      ansible.builtin.debug:
+        msg: "{{ my_hostname }}"
