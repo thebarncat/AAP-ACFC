@@ -25,13 +25,13 @@
           controller_number: 1
           unit_number: 0
         
-     - name: assign vmware backup tag
-       community.vmware.vmware_tag_manager:
-         object_name: "{{ vm_name }}"
-         object_type: "VirtualMachine"
-         state: present
-         tag_names:
-            - bkup-nonprod-os
+    - name: assign vmware backup tag
+      community.vmware.vmware_tag_manager:
+        object_name: "{{ vm_name }}"
+        object_type: "VirtualMachine"
+        state: present
+        tag_names:
+           - bkup-nonprod-os
          
          
         
