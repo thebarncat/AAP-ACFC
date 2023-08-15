@@ -1,0 +1,29 @@
+---
+- name: Add hostname record to infoblox
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    #my_hostname: test001
+    fqdn: "{{ my_hostname }}.kmhp.com"
+    ipv4addr: "{{ lookup('infoblox.nios_modules.nios_next_ip', '10.148.83.0/25') }}"
+
+  tasks:
+    - name: Ensure host record exists in infoblox 
+      connection: local
+      infoblox.nios_modules.nios_host_record:
+        name: "{{ fqdn }}"
+        comment: "new host provisioning - {{ fqdn }}"
+        state: present
+        ipv4addrs:
+          - ipv4addr: "{{ ipv4addr }}"
+        provider: {}
+
+    - name: Look up network in infoblox using lookup plugin
+      ansible.builtin.set_fact:
+        host_records: "{{ lookup('infoblox.nios_modules.nios_lookup', 'record:host', filter={'name': fqdn}, return_fields=['extattrs', 'name', 'view', 'comment']) }}"
+
+    - name: Print out record:host var
+      ansible.builtin.debug:
+        msg: "{{ host_records }}"
