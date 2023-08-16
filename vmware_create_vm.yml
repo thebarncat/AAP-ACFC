@@ -4,6 +4,8 @@
   become: false
   gather_facts: false
   
+  vars:
+    disks: []
 
   tasks:
     - name: Add disk 1 size to array
