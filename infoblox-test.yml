@@ -15,7 +15,7 @@
   
     - name: Get next IP
       ansible.builtin.set_fact:
-        ipv4addr: "{{ lookup('infoblox.nios_modules.nios_next_ip', '10.148.83.0/25' }}"
+        ipv4addr: "{{ lookup('infoblox.nios_modules.nios_next_ip', '10.148.83.0/25') }}"
 
     - name: Print ip address
       ansible.builtin.debug:
