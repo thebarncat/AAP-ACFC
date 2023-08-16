@@ -21,7 +21,7 @@
         comment: "new host provisioning - {{ fqdn }}"
         state: present
         ipv4addrs:
-          - ipv4addr: 10.148.83.2 #"{{ ipv4addr }}"
+          - ipv4addr: "{{ ipv4addr }}"
         provider: {}
 
     - name: Look up network in infoblox using lookup plugin
