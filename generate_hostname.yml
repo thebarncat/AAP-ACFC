@@ -13,11 +13,11 @@
           ansible.builtin.set_stats:
             aggregate: true
             data:
-              my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}w{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}001"
+              my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}w{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}100"
 
         - name: Generate windows hostname and save as variable
           ansible.builtin.set_fact:
-            my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}w{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}001"
+            my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}w{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}100"
 
     - name: Generate linux host name var and stat
       when: input_os.find('RHEL') != -1
@@ -27,11 +27,11 @@
           ansible.builtin.set_stats:
             aggregate: true
             data:
-              my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}l{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}001"
+              my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}l{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}100"
 
         - name: Generate linux hostname and save as variable
           ansible.builtin.set_fact:
-            my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}l{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}001"
+            my_hostname: "cgv{{ input_vm_environment.split(' - ')|first }}l{{ input_vm_application_or_function_code }}{{ input_vm_purpose.split(' - ')|first }}100"
         
     - name: Test if my_hostname_base exists
       ansible.builtin.debug:
