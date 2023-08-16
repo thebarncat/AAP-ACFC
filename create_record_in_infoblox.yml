@@ -20,7 +20,7 @@
   
     - name: Print out next IP address for testing
       ansible.builtin.debug:
-        msg: "{{ ipv4addr }}""
+        msg: "{{ ipv4addr }}"
 
     - name: Ensure host record exists in infoblox 
       connection: local
