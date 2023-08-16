@@ -5,6 +5,14 @@
   gather_facts: false
 
   tasks:
+    - name: look up network view objects
+      ansible.builtin.set_fact:
+        networkviews: "{{ lookup('infoblox.nios_modules.nios_lookup', 'networkview') }}"
+    
+    - name: Print networkviews object
+      ansible.builtin.debug:
+        var: networkviews
+  
     - name: Get next IP
       ansible.builtin.set_fact:
         ipv4addr: "{{ lookup('infoblox.nios_modules.nios_next_ip', '10.148.83.0/25' }}"
