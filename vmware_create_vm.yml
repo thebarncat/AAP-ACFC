@@ -7,17 +7,17 @@
 
   tasks:
     - name: Add disk 1 size to array
-      when: (input_disk_1_size_in_gb is defined) and (input_disk_1_size_in_gb > 0)
+      when: (input_disk_1_size_in_gb is defined) and (input_disk_1_size_in_gb|length > 0)
       ansible.builtin.set_fact:
         disks: "{{ disks + [{'unit_number':1,'size_gb':input_disk_1_size_in_gb, 'controller_type': 'paravirtual', 'controller_number':1}] }}"
 
     - name: Add disk 2 size to array
-      when: (input_disk_2_size_in_gb is defined) and (input_disk_2_size_in_gb > 0)
+      when: (input_disk_2_size_in_gb is defined) and (input_disk_2_size_in_gb|length > 0)
       ansible.builtin.set_fact:
         disks: "{{ disks + [{'unit_number':2,'size_gb':input_disk_2_size_in_gb, 'controller_type': 'paravirtual', 'controller_number':1}] }}"
 
     - name: Add disk 3 size to array
-      when: (input_disk_3_size_in_gb is defined) and (input_disk_3_size_in_gb > 0)
+      when: (input_disk_3_size_in_gb is defined) and (input_disk_3_size_in_gb|length > 0)
       ansible.builtin.set_fact:
         disks: "{{ disks + [{'unit_number':3,'size_gb':input_disk_3_size_in_gb, 'controller_type': 'paravirtual', 'controller_number':1}] }}"
 
