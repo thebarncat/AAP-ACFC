@@ -7,7 +7,7 @@
   vars:
     #my_hostname: test001
     fqdn: "{{ my_hostname }}.kmhp.com"
-    ipv4addr: "{{ lookup('infoblox.nios_modules.nios_next_ip', '10.148.83.0/25') }}"
+    ipv4addr: 10.148.83.2 #"{{ lookup('infoblox.nios_modules.nios_next_ip', '10.148.83.0/25') }}"
 
   tasks:
     - name: Ensure host record exists in infoblox 
