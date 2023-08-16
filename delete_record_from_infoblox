@@ -1,0 +1,13 @@
+---
+- name: Delete a record from infoblox
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Ensure host record doesn't exist in infoblox
+      connection: local
+      infoblox.nios_modules.nios_host_record:
+        name: "{{ hostname }}.kmhp.com"
+        state: absent
+        provider: {}
