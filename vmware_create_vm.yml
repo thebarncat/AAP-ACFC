@@ -41,7 +41,8 @@
             start_connected: true
             type: static
             vlan: "633"
-
+          - name: 630-Linux-Non-Prod
+          - name: 835-Server-NAS-Share
 
     - name: Set the template name for a Windows VM
       when: input_os.find('Windows') != -1
@@ -52,7 +53,7 @@
         folder: "Template"
         vm_state: "poweredon"
         vm_networks:
-          - name: "643-NP-Windows-Mgmt"
+          - name: 643-NP-Windows-Mgmt
             connected: true
             gateway: 10.148.85.8
             ip: "{{ ipv4addr }}"
@@ -60,6 +61,8 @@
             start_connected: true
             type: static
             vlan: "643"
+          - name: 646-SQL-NProd-Data
+          - name: 835-Server-NAS-Share
     
 
     - name: create vm from template
