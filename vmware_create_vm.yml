@@ -33,7 +33,7 @@
         folder: "Template"
         vm_state: "poweredon"
         vm_networks:
-          - name: "633-NP-Linux-Mgm"
+          - name: "633-NP-Linux-Mgmt"
             connected: true
             gateway: 10.148.83.1
             ip: "{{ ipv4addr }}"
@@ -52,7 +52,7 @@
         folder: "Template"
         vm_state: "poweredon"
         vm_networks:
-          - name: 643-NP-Windows-Mgmt
+          - name: "643-NP-Windows-Mgmt"
             connected: true
             gateway: 10.148.85.8
             ip: "{{ ipv4addr }}"
