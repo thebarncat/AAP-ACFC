@@ -35,5 +35,9 @@
             \"input_memory_size_in_gb\":\"32\",
             \"input_backup_tag\":\"bkup-nonprod-os\",
             \"input_vm_purpose\":\"mt - Metadata Server\"
+            \"input_disk_1_size_in_gb\":\"20\"
+            \"input_disk_1_mount_point_drive_letter\":\"/tmp/data"\"
+            \"input_disk_2_size_in_gb\":\"10\"
+            \"input_disk_2_mount_point_drive_letter\":\"/tmp/data2"\"
         }"
 }
