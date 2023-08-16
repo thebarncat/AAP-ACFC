@@ -24,9 +24,7 @@
 
     - name: Set stat for downstream playbook - ipv4addr
       ansible.builtin.set_stats:
-        aggregate: true
-        data:
-          ipv4addr: "{{ ipv4addr }}"
+        ipv4addr: "{{ ipv4addr }}"
 
     - name: Ensure host record exists in infoblox 
       connection: local
@@ -34,8 +32,7 @@
         name: "{{ fqdn }}"
         comment: "new host provisioning - {{ fqdn }}"
         state: present
-        ipv4addrs:
-          - ipv4addr: "{{ ipv4addr }}"
+        ipv4addrs: "{{ ipv4addr }}"
         provider: {}
 
     - name: Look up network in infoblox using lookup plugin
