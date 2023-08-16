@@ -22,12 +22,6 @@
       ansible.builtin.debug:
         msg: ipv4addr
 
-    - name: Set stat for downstream playbook - ipv4addr
-      ansible.builtin.set_stats:
-        aggregate: true
-        data:
-          ipv4addr: "{{ ipv4addr.0 }}"
-
     - name: Ensure host record exists in infoblox 
       connection: local
       infoblox.nios_modules.nios_host_record:
@@ -36,6 +30,12 @@
         state: present
         ipv4addrs: "{{ ipv4addr }}"
         provider: {}
+
+    - name: Set stat for downstream playbook - ipv4addr
+      ansible.builtin.set_stats:
+        aggregate: true
+        data:
+          ipv4addr: "{{ ipv4addr.0 }}"
 
     - name: Look up network in infoblox using lookup plugin
       ansible.builtin.set_fact:
