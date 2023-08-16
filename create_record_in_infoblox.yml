@@ -20,7 +20,7 @@
   
     - name: Print out next IP address for testing
       ansible.builtin.debug:
-        msg: ipv4addr
+        msg: "{{ ipv4addr }}""
 
     - name: Ensure host record exists in infoblox 
       connection: local
@@ -28,7 +28,8 @@
         name: "{{ fqdn }}"
         comment: "new host provisioning - {{ fqdn }}"
         state: present
-        ipv4addrs: "{{ ipv4addr }}"
+        ipv4addrs:
+          - "{{ ipv4addr.0 }}"
         provider: {}
 
     - name: Set stat for downstream playbook - ipv4addr
