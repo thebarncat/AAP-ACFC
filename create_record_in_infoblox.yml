@@ -5,14 +5,26 @@
   gather_facts: false
 
   vars:
-    #my_hostname: test001
     fqdn: "{{ my_hostname }}.kmhp.com"
-    ipv4addr: "{{ lookup('infoblox.nios_modules.nios_next_ip', '10.148.80.0/22') }}"
 
   tasks:
+    - name: Look up next ip address in Infoblox - Linux
+      when: input_os.find('RHEL') != -1
+      ansible.builtin.set_fact:
+        ipv4addr: "{{ lookup('infoblox.nios_modules.nios_next_ip', '10.148.80.0/22') }}"
+   
+    - name: Look up next ip address in Infoblox - Windows
+      when: input_os.find('Windows') != -1
+      ansible.builtin.set_fact:
+        ipv4addr: "{{ lookup('infoblox.nios_modules.nios_next_ip', '10.148.84.0/22') }}"
+  
     - name: Print out next IP address for testing
       ansible.builtin.debug:
         msg: ipv4addr
+
+    - name: Set stat for downstream playbook - ipv4addr
+      ansible.builtin.set_stats:
+        ipv4addr: "{{ ipv4addr }}"
 
     - name: Ensure host record exists in infoblox 
       connection: local
