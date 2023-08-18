@@ -7,6 +7,7 @@
   tasks:
     - name: Ensure host record doesn't exist in infoblox
       connection: local
+      when: (my_hostname is defined) and (my_hostname|length > 0)
       infoblox.nios_modules.nios_host_record:
         name: "{{ my_hostname }}.kmhp.com"
         state: absent
