@@ -28,6 +28,7 @@
         aggregate: true
         data:
           my_hostname: "{{ my_hostname }}"
+          disks: "{{ disks }}"
 
     - name: Set the template name for a Linux vm
       when: input_os.find('RHEL') != -1
