@@ -23,6 +23,11 @@
       ansible.builtin.set_fact:
         disks: "{{ disks + [{'unit_number':3,'size_gb':input_disk_3_size_in_gb, 'controller_type': 'paravirtual', 'controller_number':1}] }}"
 
+    - name: Set stat - my_hostname
+      ansible.builtin.set_stats:
+        aggregate: true
+        data:
+          my_hostname: "{{ my_hostname }}"
 
     - name: Set the template name for a Linux vm
       when: input_os.find('RHEL') != -1
