@@ -14,7 +14,7 @@
 - name: Start post-provisioning tasks for new Linux virtual machine
   hosts: "Just_Created_{{ input_os }}"
   become: true
-  gather_facts: true
+  gather_facts: false
 
   vars:
     linux_device_map:
@@ -36,6 +36,17 @@
   #  domain_password: "" #not in here so i don't accidentally push to git
 
   tasks:
+    - name: Ensure host is reachable after provisioning
+      ansible.builtin.wait_for_connection:
+        connect_timeout: 5
+        delay: 0
+        sleep: 1
+        timeout: 600
+
+    - name: Gather facts for new host
+      ansible.builtin.setup:
+
+    
     - name: Include tasks for Linux post-provisioning - add to domain
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_linux_domain.yml
@@ -49,11 +60,23 @@
 - name: Start post-provisioning tasks for new Linux virtual machine
   hosts: "Just_Created_{{ input_os }}"
   become: true
-  gather_facts: true
+  gather_facts: false
   connection: winrm
   become_method: runas
 
   tasks:
+
+    - name: Ensure host is reachable after provisioning
+      ansible.builtin.wait_for_connection:
+        connect_timeout: 5
+        delay: 0
+        sleep: 1
+        timeout: 600
+
+    - name: Gather facts for new host
+      ansible.builtin.setup:
+      
+
     - name: Include tasks for Windows post-provisioning
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_windows.yml
