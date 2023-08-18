@@ -1,6 +1,18 @@
 ---
-- name: Start post-provisioning tasks for new virtual machine
-  hosts: "{{ my_hostname }}"
+- name: VM post-provisioning handler
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Add new host to temporary group in in-memory inventory
+      ansible.bultin.add_host:
+        host: "{{ my_hostname }}"
+        groups:
+          - "Just_Created_{{ input_os }}"
+
+- name: Start post-provisioning tasks for new Linux virtual machine
+  hosts: "Just_Created_{{ input_os }}"
   become: true
   gather_facts: true
 
@@ -25,18 +37,23 @@
 
   tasks:
     - name: Include tasks for Linux post-provisioning - add to domain
-      when: input_os.find('RHEL') != -1
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_linux_domain.yml
 
     - name: Include task for Linux post-provisioning - configure volumes and file systems
-      when: (input_os.find('RHEL') != -1) and (disks is defined)
+      when: disks is defined
       loop: "{{ disks }}"
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_linux_disks.yml
 
+- name: Start post-provisioning tasks for new Linux virtual machine
+  hosts: "Just_Created_{{ input_os }}"
+  become: true
+  gather_facts: true
+  connection: winrm
+  become_method: runas
 
+  tasks:
     - name: Include tasks for Windows post-provisioning
-      when: input_os.find('Windows') != -1
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_windows.yml
