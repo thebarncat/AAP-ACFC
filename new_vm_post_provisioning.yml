@@ -46,16 +46,15 @@
     - name: Gather facts for new host
       ansible.builtin.setup:
 
-    
-    - name: Include tasks for Linux post-provisioning - add to domain
-      ansible.builtin.include_tasks:
-        file: tasks/post_provisioning_linux_domain.yml
-
     - name: Include task for Linux post-provisioning - configure volumes and file systems
       when: disks is defined
       loop: "{{ disks }}"
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_linux_disks.yml
+    
+    - name: Include tasks for Linux post-provisioning - add to domain
+      ansible.builtin.include_tasks:
+        file: tasks/post_provisioning_linux_domain.yml
 
 - name: Start post-provisioning tasks for new Linux virtual machine
   hosts: "Just_Created_{{ input_os.split(' ')|first }}"
