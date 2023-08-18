@@ -5,7 +5,7 @@
     state: absent
 
 - name: Ensure managed node has joined the Centrify domain
-  no_log: true
+  #no_log: true
   ansible.builtin.command:
     cmd: "/usr/sbin/adjoin -u {{ domain_user|quote }} -p {{ domain_password|quote }} -z Global -c 'kmhp.com/Centrify/Servers/CGV' -N {{ my_hostname }} kmhp.com"
 
