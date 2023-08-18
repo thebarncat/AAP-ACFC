@@ -1,0 +1,42 @@
+---
+- name: Start post-provisioning tasks for new virtual machine
+  hosts: "{{ my_hostname }}"
+  become: true
+  gather_facts: true
+
+  vars:
+    linux_device_map:
+      1: b
+      2: c
+      3: d
+      4: e
+      5: f
+      6: g
+      7: h
+      8: i
+      9: j
+      10: k
+  vars_files:
+    - centrify_secret.yml
+
+  #vars:
+  #  domain_user: "" #not in here so i don't accidentally push to git
+  #  domain_password: "" #not in here so i don't accidentally push to git
+
+  tasks:
+    - name: Include tasks for Linux post-provisioning - add to domain
+      when: input_os.find('RHEL') != -1
+      ansible.builtin.include_tasks:
+        file: tasks/post_provisioning_linux_domain.yml
+
+    - name: Include task for Linux post-provisioning - configure volumes and file systems
+      when: (input_os.find('RHEL') != -1) and (disks is defined)
+      loop: "{{ disks }}"
+      ansible.builtin.include_tasks:
+        file: tasks/post_provisioning_linux_disks.yml
+
+
+    - name: Include tasks for Windows post-provisioning
+      when: input_os.find('Windows') != -1
+      ansible.builtin.include_tasks:
+        file: tasks/post_provisioning_windows.yml
