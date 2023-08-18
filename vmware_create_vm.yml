@@ -75,7 +75,7 @@
         state: "{{ vm_state }}"
         networks: "{{ vm_networks }}"
         hardware: 
-          memory_mb: "{{ input_memory_size_in_gb*1024 }}"
+          memory_mb: "{{ input_memory_size_in_gb|int*1024 }}"
           num_cpus: "{{ input_cpu }}"
           num_cpu_cores_per_socket: 1
         datastore: CGVPUR701A1-NP-NRPL-VVOLS
