@@ -10,6 +10,11 @@
     path: /etc/resolv.conf.standard
     state: absent
 
+- name: Ensure NetworkManager service is restarted
+  ansible.builtin.service:
+    name: NetworkManager
+    state: restarted
+
 - name: Ensure package CentrifyDA is not installed on the managed host
   ansible.builtin.dnf:
     name: CentrifyDA
