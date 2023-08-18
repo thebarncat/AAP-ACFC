@@ -1,0 +1,26 @@
+---
+- name: Ensure package CentrifyDA is not installed on the managed host
+  ansible.builtin.dnf:
+    name: CentrifyDA
+    state: absent
+
+- name: Ensure managed node has joined the Centrify domain
+  no_log: true
+  ansible.builtin.command:
+    cmd: "/usr/sbin/adjoin -u {{ domain_user|quote }} -p {{ domain_password|quote }} -z Global -c 'kmhp.com/Centrify/Servers/CGV' -N {{ my_hostname }} kmhp.com"
+
+
+- name: Confirm managed node has joined the Centrify domain
+  ansible.builtin.command:
+    cmd: "/usr/bin/adinfo -m"
+
+- name: Ensure package centrifydc is installed on the managed host
+  ansible.builtin.dnf:
+    name: centrifydc
+    state: present
+
+- name: Enture the service centrifydc is enabled on the managed host
+  ansible.builtin.service:
+    name: centrifydc
+    enabled: true
+    state: started

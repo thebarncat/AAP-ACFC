@@ -1,0 +1,39 @@
+---
+- name: Ensure partition has been initialized on block device
+  community.general.parted:
+    device: "/dev/sd{{ linux_device_map[item.unit_number] }}"
+    fs_type: xfs
+    number: 1
+    state: present
+
+- name: Ensure volume group has been configured
+  community.general.lvg:
+    pvs: "/dev/sd{{ linux_device_map[item.unit_number] }}"
+    state: present
+    vg: "vg_{{ input_vm_purpose.split(' - ')|first}}{{item.unit_number}}"
+
+- name: Ensure logical volume has been configured
+  community.general.lvol:
+    lv: "lv_{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter']|replace('/','_') }}"
+    size: 100%PVS
+    state: present
+    vg: vg_ap1
+
+- name: Ensure directory to mount FS exists
+  ansible.builtin.file:
+    path: "{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter'] }}"
+    state: directory
+    mode: '0755'
+  
+- name: Ensure file system exists on volume group
+  community.general.filesystem:
+    fstype: xfs
+    dev: "/dev/vg_{{ input_vm_purpose.split(' - ')|first}}{{item.unit_number}}/lv_{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter']|replace('/','_') }}"
+    state: present
+
+- name: Ensure file system mounted to mount point directory
+  ansible.posix.mount:
+    path: "{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter'] }}"
+    src: "/dev/vg_{{ input_vm_purpose.split(' - ')|first}}{{item.unit_number}}/lv_{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter']|replace('/','_') }}"
+    fstype: xfs
+    state: mounted
