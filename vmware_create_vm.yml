@@ -93,3 +93,17 @@
         state: present
         tag_names:
            - "{{ input_backup_tag }}"
+
+    - name: Wait for Linux VM to boot up
+      when: input_os.find('RHEL') != -1
+      ansible.builtin.wait_for:
+        host: "{{ my_hostname }}"
+        port: 22
+        delay: 30
+
+    - name: Wait for Windows VM to boot up
+      when: input_os.find('Windows') != -1
+      ansible.builtin.wait_for:
+        host: "{{ my_hostname }}"
+        port: 3389
+        delay: 30
