@@ -8,6 +8,6 @@
     - name: Ensure host record doesn't exist in infoblox
       connection: local
       infoblox.nios_modules.nios_host_record:
-        name: "{{ hostname }}.kmhp.com"
+        name: "{{ my_hostname }}.kmhp.com"
         state: absent
         provider: {}
