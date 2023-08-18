@@ -9,10 +9,10 @@
       ansible.builtin.add_host:
         host: "{{ my_hostname }}"
         groups:
-          - "Just_Created_{{ input_os }}"
+          - "Just_Created_{{ input_os.split(' ')|first }}"
 
 - name: Start post-provisioning tasks for new Linux virtual machine
-  hosts: "Just_Created_{{ input_os }}"
+  hosts: "Just_Created_{{ input_os.split(' ')|first }}"
   become: true
   gather_facts: false
 
@@ -58,7 +58,7 @@
         file: tasks/post_provisioning_linux_disks.yml
 
 - name: Start post-provisioning tasks for new Linux virtual machine
-  hosts: "Just_Created_{{ input_os }}"
+  hosts: "Just_Created_{{ input_os.split(' ')|first }}"
   become: true
   gather_facts: false
   connection: winrm
@@ -76,7 +76,6 @@
     - name: Gather facts for new host
       ansible.builtin.setup:
       
-
     - name: Include tasks for Windows post-provisioning
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_windows.yml
