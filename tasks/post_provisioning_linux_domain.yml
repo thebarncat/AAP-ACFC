@@ -1,4 +1,15 @@
 ---
+- name: Ensure resolv.conf.standard is copied to resolv.conf.standard
+  ansible.builtin.copy:
+    remote_src: true
+    src: /etc/resolv.conf.standard
+    dest: /etc/resolv.conf
+
+- name: Ensure resolv.conf.standard is deleted
+  ansible.builtin.file:
+    path: /etc/resolv.conf.standard
+    state: absent
+
 - name: Ensure package CentrifyDA is not installed on the managed host
   ansible.builtin.dnf:
     name: CentrifyDA
@@ -8,7 +19,6 @@
   #no_log: true
   ansible.builtin.command:
     cmd: "/usr/sbin/adjoin -u {{ domain_user|quote }} -p {{ domain_password|quote }} -z Global -c 'kmhp.com/Centrify/Servers/CGV' -N {{ my_hostname }} kmhp.com"
-
 
 - name: Confirm managed node has joined the Centrify domain
   ansible.builtin.command:
