@@ -99,11 +99,11 @@
       ansible.builtin.wait_for:
         host: "{{ my_hostname }}"
         port: 22
-        delay: 30
+        delay: 60
 
     - name: Wait for Windows VM to boot up
       when: input_os.find('Windows') != -1
       ansible.builtin.wait_for:
         host: "{{ my_hostname }}"
         port: 3389
-        delay: 30
+        delay: 60
