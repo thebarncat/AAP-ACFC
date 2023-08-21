@@ -15,7 +15,7 @@
   community.general.redhat_subscription:
     activationkey: RHEL8-NON-PROD-AK
     consumer_name: "{{ my_hostname }}"
-    force_registration: true
+    force_register: true
     org_id: ACFC-PROD
     rhsm_baseurl: https://cgv-prod-capsule.kmhp.com/pulp/repos
     server_hostname: cgv-prod-capsule.kmhp.com:8443/
