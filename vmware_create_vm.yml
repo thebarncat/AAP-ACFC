@@ -76,7 +76,7 @@
         vm_networks:
           - name: 643-NP-Windows-Mgmt
             connected: true
-            gateway: 10.148.85.8
+            gateway: 10.148.84.1
             ip: "{{ ipv4addr }}"
             netmask: 255.255.252.0
             start_connected: true
