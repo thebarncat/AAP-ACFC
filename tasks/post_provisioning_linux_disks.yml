@@ -15,7 +15,7 @@
 - name: Ensure logical volume has been configured
   community.general.lvol:
     lv: "lv_{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter']|replace('/','_') }}"
-    size: 100%PVS
+    size: 100%FREE
     state: present
     vg: vg_ap1
 
