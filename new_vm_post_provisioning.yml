@@ -46,6 +46,22 @@
     - name: Gather facts for new host
       ansible.builtin.setup:
 
+    - name: Ensure resolv.conf.standard is copied to resolv.conf.standard
+      ansible.builtin.copy:
+        remote_src: true
+        src: /etc/resolv.conf.standard
+        dest: /etc/resolv.conf
+
+    - name: Ensure resolv.conf.standard is deleted
+      ansible.builtin.file:
+        path: /etc/resolv.conf.standard
+        state: absent
+
+    - name: Ensure NetworkManager service is restarted
+      ansible.builtin.service:
+        name: NetworkManager
+        state: restarted
+
     - name: Include tasks for Linux post-provisioning - configure volumes and file systems
       when: disks is defined
       loop: "{{ disks }}"
