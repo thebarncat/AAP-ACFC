@@ -1,0 +1,28 @@
+{
+    "extra_vars":
+        "{
+            \"input_install_splunk\":\"no\",
+            \"@version\":\"1\",
+            \"input_windows_security_group":\"adm-msteinh\",
+            \"input_os\":\"Windows 2022\",
+            \"input_application_name\":\"WebServer\",
+            \"input_vm_application_or_function_code\":\"uat\",
+            \"input_email_notification_recipient_list\":\"sfennal@amerihealthcaritas.com\",
+            \"@timestamp\":\"2023-08-04T20:29:12.026Z\",
+            \"input_vm_environment\":\"x1 - QA\",
+            \"input_centrify_environment\":\"qa\",
+            \"input_catalog_names\":\"Deploy Windows 2022 Datacenter VM in Non-Prod\",
+            \"input_centrify_application_name\":\"DataStage\",
+            \"input_cpu\":\"4\",
+            \"request_recid\":\"A1F3CE3ECD13457B8BBFE5F342D51E75\",
+            \"host\":\"10.150.64.62\",
+            \"request_number\":\"742600\",
+            \"input_memory_size_in_gb\":\"32\",
+            \"input_backup_tag\":\"bkup-nonprod-os\",
+            \"input_vm_purpose\":\"we - Web Server\",
+            \"input_disk_1_size_in_gb\":\"20\",
+            \"input_disk_1_mount_point_drive_letter\":\"D\",
+            \"input_disk_2_size_in_gb\":\"10\",
+            \"input_disk_2_mount_point_drive_letter\":\"E\",
+        }"
+}
