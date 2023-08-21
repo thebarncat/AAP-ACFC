@@ -5,21 +5,25 @@
     state: directory
     recurse: true
 
-- name: Ensure /etc/rhsm/facts/katello.facts exists and contains correct hosname
+- name: Ensure /etc/rhsm/facts/katello.facts exists and contains correct hostname
   ansible.builtin.template:
     dest: /etc/rhsm/facts/katello.facts
     force: true
     src: templates/katello.facts.j2
 
-- name: Register to satellite
-  community.general.redhat_subscription:
-    activationkey: RHEL8-NON-PROD-AK
-    consumer_name: "{{ my_hostname }}"
-    force_register: true
-    org_id: ACFC-PROD
-    rhsm_baseurl: https://cgv-prod-capsule.kmhp.com/pulp/repos
-    server_hostname: https://cgv-prod-capsule.kmhp.com:8443/rhsm
+- name: Register to Satellite
+  ansible.builtin.command:
+    cmd: "subscription-manager register --org=ACFC-PROD --activationkey=RHEL8-NON-PROD-AK --serverurl=https://cgv-prod-capsule.kmhp.com:8443/rhsm --baseurl=https://cgv-prod-capsule.kmhp.com/pulp/repos --name={{ my_hostname }}.kmhp.com --force"
+
+#- name: Register to satellite
+#  community.general.redhat_subscription:
+#    activationkey: RHEL8-NON-PROD-AK
+#    consumer_name: "{{ my_hostname }}"
+#    force_register: true
+#    org_id: ACFC-PROD
+#    rhsm_baseurl: https://cgv-prod-capsule.kmhp.com/pulp/repos
+#    server_hostname: https://cgv-prod-capsule.kmhp.com:8443/rhsm
     #server_port: 8443
     #server_prefix: https://
-    server_insecure: true
-    state: present
+#    server_insecure: true
+#    state: present
