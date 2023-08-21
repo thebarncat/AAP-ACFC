@@ -1,0 +1,50 @@
+---
+- name: VM post-provisioning handler
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Add new host to temporary group in in-memory inventory
+      ansible.builtin.add_host:
+        host: "{{ my_hostname }}"
+        groups:
+          - "Just_Created_{{ input_os.split(' ')|first }}"
+
+
+- name: Start post-provisioning tasks for new Windows virtual machine
+  hosts: "Just_Created_{{ input_os.split(' ')|first }}"
+  become: true
+  gather_facts: false
+  connection: winrm
+  become_method: runas
+
+  vars:
+    ansible_winrm_server_cert_validate: ignore
+    dns_domain_name: "KMHP.COM"
+    domain_ou_path: "ou=virtualmachines,ou=clientdevices,dc=kmhp,dc=com"
+
+  vars_files:
+    - win_domain_secret.yml
+
+  tasks:
+
+    - name: Ensure host is reachable after provisioning
+      ansible.builtin.wait_for_connection:
+        connect_timeout: 5
+        delay: 0
+        sleep: 1
+        timeout: 600
+
+    - name: Gather facts for new host
+      ansible.builtin.setup:
+      
+    - name: Include tasks for Windows post-provisioning - Disks
+      when: disks is defined
+      loop: "{{ disks }}"
+      ansible.builtin.include_tasks:
+        file: tasks/post_provisioning_windows_disks.yml
+
+    - name: Include tasks for Windows post-provisioning - Domain and MECM
+      ansible.builtin.include_tasks:
+        file: tasks/post_provisioning_windows_domain.yml
