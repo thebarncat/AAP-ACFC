@@ -8,7 +8,7 @@
 
 - name: Ensure volume group has been configured
   community.general.lvg:
-    pvs: "/dev/sd{{ linux_device_map[item.unit_number] }}"
+    pvs: "/dev/sd{{ linux_device_map[item.unit_number] }} ~ '1'"
     state: present
     vg: "vg_{{ input_vm_purpose.split(' - ')|first}}{{item.unit_number}}"
 
