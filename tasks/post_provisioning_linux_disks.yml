@@ -17,7 +17,7 @@
     lv: "lv_{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter']|replace('/','_') }}"
     size: 100%FREE
     state: present
-    vg: vg_ap1
+    vg: "vg_{{ input_vm_purpose.split(' - ')|first}}{{item.unit_number}}"
 
 - name: Ensure directory to mount FS exists
   ansible.builtin.file:
