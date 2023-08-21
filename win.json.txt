@@ -3,7 +3,7 @@
         "{
             \"input_install_splunk\":\"no\",
             \"@version\":\"1\",
-            \"input_windows_security_group":\"adm-msteinh\",
+            \"input_windows_security_group\":\"adm-msteinh\",
             \"input_os\":\"Windows 2022\",
             \"input_application_name\":\"WebServer\",
             \"input_vm_application_or_function_code\":\"uat\",

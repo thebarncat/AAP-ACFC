@@ -29,15 +29,15 @@
           ipv4addr: "{{ ipv4addr.0 }}"
 
 
-      - name: Ensure host record exists in infoblox 
-        connection: local
-        infoblox.nios_modules.nios_host_record:
-          name: "{{ fqdn }}"
-          comment: "new host provisioning - {{ fqdn }}"
-          state: present
-          ipv4addrs:
-            - ipv4addr: "{{ ipv4addr.0 }}"
-          provider: {}
+    - name: Ensure host record exists in infoblox 
+      connection: local
+      infoblox.nios_modules.nios_host_record:
+        name: "{{ fqdn }}"
+        comment: "new host provisioning - {{ fqdn }}"
+        state: present
+        ipv4addrs:
+          - ipv4addr: "{{ ipv4addr.0 }}"
+        provider: {}
 
 
     - name: Look up network in infoblox using lookup plugin
