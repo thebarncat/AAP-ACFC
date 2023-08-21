@@ -1,0 +1,33 @@
+---
+- name: Initialize disks
+  tags:
+    - disk_init
+  community.windows.win_initialize_disk:
+    disk_number: "{{ item.unit_number+1 }}"
+    online: true
+    style: "{{ win_disk_style | default('gpt') }}"
+
+- name: Partition disk 1
+  tags:
+    - disk_partition
+  community.windows.win_partition:
+    drive_letter: "{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter']|replace('/','_') }}"
+    disk_number: "{{ item.unit_number+1 }}"
+    partition_size: "{{ vars['input_disk' + item.unit_number|string + '_size_in_gb'] ~ ' GB' }}"
+    state: present
+
+
+- name: Write filesystem
+  tags:
+    - disk_write_fs
+  community.windows.win_format:
+    drive_letter: "{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter']|replace('/','_') }}"
+    label: "{{ win_disk_label | default(omit) }}"
+    file_system: "{{ win_disk_fs | default('NTFS') }}"
+    
+
+
+
+
+
+

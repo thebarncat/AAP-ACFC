@@ -1,0 +1,25 @@
+---
+- name: Ensure /etc/rhsm/facts directory exists
+  ansible.builtin.file:
+    path: /etc/rhsm/facts
+    state: directory
+    recurse: true
+
+- name: Ensure /etc/rhsm/facts/katello.facts exists and contains correct hosname
+  ansible.builtin.template:
+    dest: /etc/rhsm/facts/katello.facts
+    force: true
+    src: ../templates/katello.facts.j2
+
+- name: Register to satellite
+  community.general.redhat_subscription:
+    activationkey: RHEL8-NON-PROD-AK
+    consumer_name: "{{ my_hostname }}"
+    force_registration: true
+    org_id: ACFC-PROD
+    rhsm_baseurl: https://cgv-prod-capsule.kmhp.com/pulp/repos
+    server_hostname: cgv-prod-capsule.kmhp.com:8443/
+    server_port: 8443
+    server_prefix: https://
+    server_insecure: true
+    state: present

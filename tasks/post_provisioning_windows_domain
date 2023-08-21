@@ -1,0 +1,35 @@
+- name: Join Windows domain
+  tags:
+    - active_directory
+  ansible.windows.win_domain_membership:
+    dns_domain_name: "{{ win_ad_domain_name | default(omit) }}"
+    domain_admin_password: "{{ win_ad_admin_password | default(omit) }}"
+    domain_admin_user: "{{ win_ad_admin_user }}"
+    domain_ou_path: "{{ win_ad_ou_path | default(omit) }}"
+    hostname: "{{ win_ad_hostname | default(omit) }}"
+    state: "{{ win_ad_state | default('domain') }}"   # can be one of 'domain' or 'workgroup'
+    workgroup_name: "{{ win_ad_workgroup_name | default(omit) }}"
+
+- name: Install and configure MECM
+  tags:
+    - mecm
+  ansible.windows.win_package:
+    path: C:\temp\client\ccmsetup.exe
+    arguments:
+      - /MP:cgvprwsccap003.kmhp.com
+      - SMSMP=cgvprwsccap003.kmhp.com
+      - SMSSITECODE=AMC
+      - SMSSLP=cgvprwsccap003.kmhp.com
+      - SMSCACHESIZE=5120
+    state: present
+
+- name: Install and configure Splunk Forwarder
+  tags:
+    - splunk
+  ansible.windows.win_package:
+    path: C:\temp\Splunk\Splunk-install.msi
+    creates_path: C:\Program Files\SplunkUniversalForwarder
+    arguments:
+      - AGREETOLICENSE=Yes
+      - DEPLOYMENT_SERVER=splunkdep.kmhp.com:8089
+      - /quiet

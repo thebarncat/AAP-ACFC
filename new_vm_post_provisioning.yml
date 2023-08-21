@@ -51,17 +51,28 @@
       loop: "{{ disks }}"
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_linux_disks.yml
+
+    - name: Include task for Linux post-provisioning - register to Satellite
+      ansible.builtin.include_tasks:
+        file: tasks/post_provisioning_linux_satellite.yml
     
     - name: Include tasks for Linux post-provisioning - add to domain
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_linux_domain.yml
 
-- name: Start post-provisioning tasks for new Linux virtual machine
+
+- name: Start post-provisioning tasks for new Windows virtual machine
   hosts: "Just_Created_{{ input_os.split(' ')|first }}"
   become: true
   gather_facts: false
   connection: winrm
   become_method: runas
+
+  vars:
+    ansible_winrm_server_cert_validate: ignore
+    input_disk_nums:
+      - 2
+      - 3
 
   tasks:
 
@@ -75,6 +86,12 @@
     - name: Gather facts for new host
       ansible.builtin.setup:
       
-    - name: Include tasks for Windows post-provisioning
+    - name: Include tasks for Windows post-provisioning - Disks
+      when: disks is defined
+      loop: "{{ disks }}"
       ansible.builtin.include_tasks:
-        file: tasks/post_provisioning_windows.yml
+        file: tasks/post_provisioning_windows_disks.yml
+
+    - name: Include tasks for Windows post-provisioning - Disks
+      ansible.builtin.include_tasks:
+        file: tasks/post_provisioning_windows_disks_domain.yml
