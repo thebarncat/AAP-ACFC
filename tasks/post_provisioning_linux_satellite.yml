@@ -18,7 +18,7 @@
     force_register: true
     org_id: ACFC-PROD
     rhsm_baseurl: https://cgv-prod-capsule.kmhp.com/pulp/repos
-    server_hostname: cgv-prod-capsule.kmhp.com:8443/
+    server_hostname: cgv-prod-capsule.kmhp.com
     server_port: 8443
     server_prefix: https://
     server_insecure: true
