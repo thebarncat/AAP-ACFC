@@ -9,19 +9,34 @@
 
   tasks:
     - name: Add disk 1 size to array
-      when: (input_disk_1_size_in_gb is defined) and (input_disk_1_size_in_gb|length > 0)
+      when: (input_disk_1_size_in_gb is defined) and (input_disk_1_size_in_gb|length > 0) and (input_os.find('RHEL') != -1)
       ansible.builtin.set_fact:
         disks: "{{ disks + [{'unit_number':1,'size_gb':input_disk_1_size_in_gb, 'controller_type': 'paravirtual', 'controller_number':1}] }}"
 
     - name: Add disk 2 size to array
-      when: (input_disk_2_size_in_gb is defined) and (input_disk_2_size_in_gb|length > 0)
+      when: (input_disk_2_size_in_gb is defined) and (input_disk_2_size_in_gb|length > 0) and (input_os.find('RHEL') != -1)
       ansible.builtin.set_fact:
         disks: "{{ disks + [{'unit_number':2,'size_gb':input_disk_2_size_in_gb, 'controller_type': 'paravirtual', 'controller_number':1}] }}"
 
     - name: Add disk 3 size to array
-      when: (input_disk_3_size_in_gb is defined) and (input_disk_3_size_in_gb|length > 0)
+      when: (input_disk_3_size_in_gb is defined) and (input_disk_3_size_in_gb|length > 0) and (input_os.find('RHEL') != -1)
       ansible.builtin.set_fact:
         disks: "{{ disks + [{'unit_number':3,'size_gb':input_disk_3_size_in_gb, 'controller_type': 'paravirtual', 'controller_number':1}] }}"
+
+    - name: Add disk 1 size to array
+      when: (input_disk_1_size_in_gb is defined) and (input_disk_1_size_in_gb|length > 0) and (input_os.find('Windows') != -1)
+      ansible.builtin.set_fact:
+        disks: "{{ disks + [{'unit_number':2,'size_gb':input_disk_1_size_in_gb, 'controller_type': 'paravirtual', 'controller_number':1}] }}"
+
+    - name: Add disk 2 size to array
+      when: (input_disk_2_size_in_gb is defined) and (input_disk_2_size_in_gb|length > 0) and (input_os.find('Windows') != -1)
+      ansible.builtin.set_fact:
+        disks: "{{ disks + [{'unit_number':3,'size_gb':input_disk_2_size_in_gb, 'controller_type': 'paravirtual', 'controller_number':1}] }}"
+
+    - name: Add disk 3 size to array
+      when: (input_disk_3_size_in_gb is defined) and (input_disk_3_size_in_gb|length > 0) and (input_os.find('Windows') != -1)
+      ansible.builtin.set_fact:
+        disks: "{{ disks + [{'unit_number':4,'size_gb':input_disk_3_size_in_gb, 'controller_type': 'paravirtual', 'controller_number':1}] }}"
 
     - name: Set stat - my_hostname
       ansible.builtin.set_stats:
@@ -70,7 +85,6 @@
           - name: 646-SQL-NProd-Data
           - name: 835-Server-NAS-Share
     
-
     - name: create vm from template
       community.vmware.vmware_guest:
         datacenter: "{{ datacenter }}"
@@ -94,21 +108,3 @@
         state: present
         tag_names:
            - "{{ input_backup_tag }}"
-    
-#    - name: Pause 30 seconds for host to boot
-#      ansible.builtin.pause:
-#        seconds: 30
-#
-#    - name: Wait for Linux VM to boot up
-#      when: input_os.find('RHEL') != -1
-#      ansible.builtin.wait_for:
-#        host: "{{ my_hostname }}"
-#        port: 22
-#        delay: 60
-#
-#    - name: Wait for Windows VM to boot up
-#      when: input_os.find('Windows') != -1
-#      ansible.windows.win_wait_for:
-#        host: "{{ my_hostname }}"
-#        port: 3389
-#        delay: 60
