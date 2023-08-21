@@ -1,0 +1,10 @@
+---
+- name: Register host to Satellite
+  hosts: "{{ my_hostname|default('localhost') }}"
+  gather_facts: true
+  become: true
+
+  tasks:
+    - name: Include tasks for satellite registration
+      ansible.builtin.include_tasks:
+        file: tasks/post_provisioning_linux_satellite.yml
