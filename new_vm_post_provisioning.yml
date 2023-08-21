@@ -46,15 +46,19 @@
     - name: Gather facts for new host
       ansible.builtin.setup:
 
-    - name: Include task for Linux post-provisioning - configure volumes and file systems
+    - name: Include tasks for Linux post-provisioning - configure volumes and file systems
       when: disks is defined
       loop: "{{ disks }}"
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_linux_disks.yml
 
-    - name: Include task for Linux post-provisioning - register to Satellite
+    - name: Include tasks for Linux post-provisioning - register to Satellite
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_linux_satellite.yml
+
+    - name: Include tasks for Linux post-provisioning - install a package
+      ansible.builtin.include_tasks:
+        file: tasks/post_provisioning_linux_install_package.yml
     
     - name: Include tasks for Linux post-provisioning - add to domain
       ansible.builtin.include_tasks:
@@ -70,9 +74,6 @@
 
   vars:
     ansible_winrm_server_cert_validate: ignore
-    input_disk_nums:
-      - 2
-      - 3
 
   tasks:
 
@@ -92,6 +93,6 @@
       ansible.builtin.include_tasks:
         file: tasks/post_provisioning_windows_disks.yml
 
-    - name: Include tasks for Windows post-provisioning - Disks
+    - name: Include tasks for Windows post-provisioning - Domain and MECM
       ansible.builtin.include_tasks:
-        file: tasks/post_provisioning_windows_disks_domain.yml
+        file: tasks/post_provisioning_windows_domain.yml

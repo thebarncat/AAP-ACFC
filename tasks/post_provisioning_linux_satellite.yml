@@ -9,7 +9,7 @@
   ansible.builtin.template:
     dest: /etc/rhsm/facts/katello.facts
     force: true
-    src: ../templates/katello.facts.j2
+    src: templates/katello.facts.j2
 
 - name: Register to satellite
   community.general.redhat_subscription:

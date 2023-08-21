@@ -1,0 +1,5 @@
+---
+- name: Ensure apache package is installed
+  ansible.builtin.dnf:
+    name: httpd
+    state: present
