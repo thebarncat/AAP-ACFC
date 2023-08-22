@@ -1,0 +1,18 @@
+---
+- name: Unjoin Windows machine from domain
+  hosts: "{{ my_hostname }}"
+  become: true
+  gather_facts: false
+  connection: winrm
+  become_method: runas
+
+  vars_files:
+    - win_domain_secret.yml
+
+  tasks:
+    - name: Ensure machine is not in domain
+      ansible.windows.win_domain_computer:
+        state: absent
+        name: "{{ my_hostname }}"
+        domain_username: "{{ win_ad_admin_user }}"
+        domain_password: "{{ win_ad_admin_password }}"

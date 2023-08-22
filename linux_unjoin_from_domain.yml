@@ -1,0 +1,19 @@
+---
+- name: Unjoin Linux host from domain
+  hosts: "{{ my_hostname }}"
+  become: true
+  gather_facts: false
+
+  vars_files:
+    - centrify_secret.yml
+
+  tasks:
+    - name: Ensure host is no longer part of the Centrify domain
+      register: adleave_output
+      ansible.builtin.command:
+        cmd: "adleave --user {{ domain_user }} --remove"
+
+    - name: Ensure centrify package is not installed
+      ansible.builtin.dnf:
+        name: centrifydc
+        state: absent

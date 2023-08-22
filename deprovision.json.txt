@@ -1,0 +1,9 @@
+{
+    "extra_vars":
+        {
+            "my_hostname": "test123",
+            "request_recid":"A1F3CE3ECD13457B8BBFE5F342D51E75",
+            "request_number":"742600"
+
+        }
+}

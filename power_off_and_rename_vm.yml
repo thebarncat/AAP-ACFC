@@ -1,0 +1,30 @@
+---
+- name: Power off and rename VM in VMWare
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    vmw_datacenter: "CGV_NP_GC"
+    vmw_folder: "Template"
+
+  tasks:
+    - name: Get UUID of VM in VMWare
+      register: vm_info
+      community.vmware.vmware_guest_info:
+        datacenter: "{{ vmw_datacenter }}"
+        folder: "{{ vmw_folder }}"
+        name: "{{ my_hostname }}"
+
+    - name: Ensure VM is powered off in VMWare
+      community.vmware.vmware_guest:
+        uuid: "{{ vm_info.instance.config.uuid }}"
+        name: "{{ my_hostname }}"
+        state: poweredoff
+
+
+    - name: Ensure VM is renamed in VMWare
+      community.vmware.vmware_guest:
+        uuid: "{{ vm_info.instance.config.uuid }}"
+        name: "{{ my_hostname }}_{{ now(false, '%Y%m%d') }}"
+        state: present
