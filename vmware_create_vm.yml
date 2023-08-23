@@ -93,7 +93,7 @@
         cluster: "{{ cluster_name }}"
         folder: "{{ folder }}"
         state: "{{ vm_state }}"
-        #networks: "{{ vm_networks }}"
+        networks: "{{ vm_networks }}"
         hardware: 
           memory_mb: "{{ input_memory_size_in_gb|int*1024 }}"
           num_cpus: "{{ input_cpu }}"

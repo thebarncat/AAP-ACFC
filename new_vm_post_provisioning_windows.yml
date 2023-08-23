@@ -6,6 +6,7 @@
 
   tasks:
     - name: Add new host to temporary group in in-memory inventory
+      when: input_os.find('Windows') != -1
       ansible.builtin.add_host:
         host: "{{ my_hostname }}.kmhp.com"
         groups:
@@ -14,7 +15,7 @@
 
 - name: Start post-provisioning tasks for new Windows virtual machine
   hosts: "Just_Created_{{ input_os.split(' ')|first }}"
-  become: true
+  #become: true
   gather_facts: false
   connection: winrm
   #become_method: runas
@@ -23,6 +24,7 @@
     ansible_winrm_server_cert_validate: ignore
     dns_domain_name: "KMHP.COM"
     domain_ou_path: "ou=virtualmachines,ou=clientdevices,dc=kmhp,dc=com"
+    
 
   vars_files:
     - win_domain_secret.yml
