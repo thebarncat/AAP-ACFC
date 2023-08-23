@@ -17,7 +17,7 @@
   become: true
   gather_facts: false
   connection: winrm
-  become_method: runas
+  #become_method: runas
 
   vars:
     ansible_winrm_server_cert_validate: ignore
