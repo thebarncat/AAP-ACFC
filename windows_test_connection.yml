@@ -1,6 +1,18 @@
 ---
+- name: Add specified host to in-memory inventory
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Add host from input to in-memory inventory
+      ansible.builtin.add_host:
+        host: "{{ my_hostname }}"
+        groups:
+          - "Temp_For_Testing"
+
 - name: Test connection to Windows machine
-  hosts: "{{ my_hostname|default(localhost) }}"
+  hosts: Temp_For_Testing
   connection: winrm
   become_method: runas
   gather_facts: false
