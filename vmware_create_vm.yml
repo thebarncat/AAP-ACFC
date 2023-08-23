@@ -69,7 +69,7 @@
       when: input_os.find('Windows') != -1
       ansible.builtin.set_fact:
         datacenter: "CGV_NP_GC"
-        template: "w2k22_sql_master"
+        template: "w2k22_master_aap"
         cluster_name: "CGVNPVLX01"
         folder: "Template"
         vm_state: "poweredon"
