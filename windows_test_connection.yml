@@ -1,0 +1,10 @@
+---
+- name: Test connection to Windows machine
+  hosts: "{{ my_hostname|default(localhost) }}"
+  connection: winrm
+  become_method: runas
+  gather_facts: false
+
+  tasks:
+    - name: Gather facts for the remote host
+      ansible.windows.setup:
