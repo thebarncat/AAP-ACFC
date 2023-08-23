@@ -14,7 +14,7 @@
 - name: Test connection to Windows machine
   hosts: Temp_For_Testing
   connection: winrm
-  become_method: runas
+  #become_method: runas
   gather_facts: false
 
   tasks:
