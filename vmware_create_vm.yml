@@ -99,7 +99,7 @@
           num_cpus: "{{ input_cpu }}"
           num_cpu_cores_per_socket: 1
         datastore: CGVPUR701A1-NP-NRPL-VVOLS
-        #disk: "{{ disks }}"
+        disk: "{{ disks }}"
         
     - name: assign vmware backup tag
       community.vmware.vmware_tag_manager:
