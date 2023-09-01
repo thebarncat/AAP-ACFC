@@ -3,7 +3,7 @@
      inline_var: "HI!!"
      myList: [1,2,3,4,3,2,5]
   tasks:
-    #- shell: echo "hello NEWMAN" > hello.out
+    #- shell: echo "hello newman" > hello.out
     - shell: echo "hello newman"
     - command: cat /etc/redhat-release 
       register: os_level
