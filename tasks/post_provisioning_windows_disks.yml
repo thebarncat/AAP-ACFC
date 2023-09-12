@@ -11,7 +11,7 @@
   tags:
     - disk_partition
   community.windows.win_partition:
-    drive_letter: "{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter']|replace('/','_') }}"
+    drive_letter: "{{ vars['input_disk_' + item.unit_number-1|string + '_mount_point_drive_letter']|replace('/','_') }}"
     disk_number: "{{ item.unit_number }}"
     partition_size: -1 #"{{ vars['input_disk_' + item.unit_number|string + '_size_in_gb'] ~ ' GB' }}"
     state: present
@@ -21,7 +21,7 @@
   tags:
     - disk_write_fs
   community.windows.win_format:
-    drive_letter: "{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter']|replace('/','_') }}"
+    drive_letter: "{{ vars['input_disk_' + item.unit_number-1|string + '_mount_point_drive_letter']|replace('/','_') }}"
     label: "{{ win_disk_label | default(omit) }}"
     file_system: "{{ win_disk_fs | default('NTFS') }}"
     
