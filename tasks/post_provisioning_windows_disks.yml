@@ -12,7 +12,7 @@
     - disk_partition
   community.windows.win_partition:
     drive_letter: "{{ vars['input_disk_' + item.unit_number|string + '_mount_point_drive_letter']|replace('/','_') }}"
-    disk_number: "{{ item.unit_number+1 }}"
+    disk_number: "{{ item.unit_number }}"
     partition_size: -1 #"{{ vars['input_disk_' + item.unit_number|string + '_size_in_gb'] ~ ' GB' }}"
     state: present
 
