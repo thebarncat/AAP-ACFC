@@ -3,11 +3,11 @@
   tags:
     - disk_init
   community.windows.win_initialize_disk:
-    disk_number: "{{ item.unit_number+1 }}"
+    disk_number: "{{ item.unit_number }}"
     online: true
     style: "{{ win_disk_style | default('gpt') }}"
 
-- name: Partition disk 1
+- name: Partition disk
   tags:
     - disk_partition
   community.windows.win_partition:
