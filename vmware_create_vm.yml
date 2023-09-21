@@ -76,6 +76,7 @@
         vm_networks:
           - name: 643-NP-Windows-Mgmt
             connected: true
+            domain: khmp.com
             gateway: 10.148.84.1
             ip: "{{ ipv4addr }}"
             netmask: 255.255.252.0
@@ -91,6 +92,7 @@
           dns_severs:
             - 10.150.96.226
             - 10.134.96.226
+          domain: kmhp.com
     
     - name: create vm from template
       community.vmware.vmware_guest:
