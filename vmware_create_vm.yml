@@ -83,13 +83,13 @@
             start_connected: true
             type: static
             vlan: "643"
-            dns_severs:
+            dns_servers:
               - 10.150.96.226
               - 10.134.96.226
           - name: 646-SQL-NProd-Data
           - name: 835-Server-NAS-Share
         customization:
-          dns_severs:
+          dns_servers:
             - 10.150.96.226
             - 10.134.96.226
           domain: kmhp.com
