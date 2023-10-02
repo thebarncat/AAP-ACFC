@@ -11,7 +11,8 @@
 
   tasks:
     - name: Ensure machine is not in domain
-      ansible.windows.win_domain_computer:
+      #ansible.windows.win_domain_computer: # cant resolve module
+      community.windows.win_domain_computer:
         state: absent
         name: "{{ my_hostname }}"
         domain_username: "{{ win_ad_admin_user }}"
