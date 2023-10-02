@@ -1,10 +1,10 @@
 ---
 - name: Unjoin Windows machine from domain
   hosts: "{{ my_hostname }}"
-  become: true
+ #become: true
   gather_facts: false
   connection: winrm
-  become_method: runas
+ #become_method: runas
 
   vars_files:
     - win_domain_secret.yml
