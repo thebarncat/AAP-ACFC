@@ -9,18 +9,18 @@
     hostname: "{{ my_hostname }}"
     state: domain
 
-- name: Install and configure MECM
-  tags:
-    - mecm
-  ansible.windows.win_package:
-    path: C:\temp\client\ccmsetup.exe
-    arguments:
-      - /MP:cgvprwsccap003.kmhp.com
-      - SMSMP=cgvprwsccap003.kmhp.com
-      - SMSSITECODE=AMC
-      - SMSSLP=cgvprwsccap003.kmhp.com
-      - SMSCACHESIZE=5120
-    state: present
+#- name: Install and configure MECM
+#  tags:
+#    - mecm
+#  ansible.windows.win_package:
+#    path: C:\temp\client\ccmsetup.exe
+#    arguments:
+#      - /MP:cgvprwsccap003.kmhp.com
+#      - SMSMP=cgvprwsccap003.kmhp.com
+#      - SMSSITECODE=AMC
+#      - SMSSLP=cgvprwsccap003.kmhp.com
+#      - SMSCACHESIZE=5120
+#    state: present
 
 - name: Install and configure Splunk Forwarder
   tags:

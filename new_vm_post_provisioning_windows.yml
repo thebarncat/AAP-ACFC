@@ -23,7 +23,7 @@
   vars:
     ansible_winrm_server_cert_validate: ignore
     win_ad_domain_name: "KMHP.COM"
-    win_ad_ou_path: "ou=virtualmachines,ou=clientdevices,dc=kmhp,dc=com"
+    win_ad_ou_path: "ou=stig,ou=winservers,ou=Collegeville,ou=datacenters,dc=kmhp,dc=com"
     
 
   vars_files:
