@@ -1,10 +1,9 @@
 ---
 - name: Unjoin Windows machine from domain
-  #hosts: "{{ my_hostname }}"
-  hosts: localhost
+  hosts: "{{ my_hostname }}"
  #become: true
   gather_facts: false
-  #connection: winrm
+  connection: winrm
  #become_method: runas
 
   vars_files:
