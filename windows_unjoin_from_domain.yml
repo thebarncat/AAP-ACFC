@@ -1,6 +1,7 @@
 ---
 - name: Unjoin Windows machine from domain
-  hosts: "{{ my_hostname }}"
+  #hosts: "{{ my_hostname }}"
+  hosts: cgvx1wuatwe103
  #become: true
   gather_facts: false
   connection: winrm
