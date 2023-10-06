@@ -1,7 +1,7 @@
 ---
 - name: Unjoin Windows machine from domain
-  #hosts: "{{ my_hostname }}"
-  hosts: cgvx1wuatwe103.kmhp.com
+  hosts: "{{ my_hostname }}"
+  #hosts: cgvx1wuatwe103.kmhp.com
  #become: true
   gather_facts: false
   connection: winrm
@@ -15,7 +15,7 @@
       #ansible.windows.win_domain_computer: # cant resolve module
       community.windows.win_domain_computer:
         state: absent
-          #name: "{{ my_hostname }}"
-        name: cgvx1wuatwe103
+        name: "{{ my_hostname }}"
+        #name: cgvx1wuatwe103
         domain_username: "{{ win_ad_admin_user }}"
         domain_password: "{{ win_ad_admin_password }}"
