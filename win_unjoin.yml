@@ -23,7 +23,7 @@
   tasks:
   - name: Join Windows domain
     ansible.windows.win_domain_membership:
-      dns_domain_name: "{{ win_ad_domain_name }}"
+      dns_domain_name: "KMHP.COM"
       domain_admin_password: "{{ win_ad_admin_password }}"
       domain_admin_user: "{{ win_ad_admin_user }}"
       domain_ou_path: "{{ win_ad_ou_path }}"
