@@ -4,14 +4,6 @@
   become: false
   gather_facts: false
 
-  vars:
-    ansible_winrm_server_cert_validate: ignore
-    win_ad_domain_name: "KMHP.COM"
-    win_ad_ou_path: "ou=stig,ou=winservers,ou=Collegeville,ou=datacenters,dc=kmhp,dc=com"
-
-  vars_files:
-     - win_domain_secret.yml
-
   tasks:
     - name: Add new host to temporary group in in-memory inventory
       when: input_os.find('Windows') != -1
@@ -21,12 +13,20 @@
         groups:
           - "Just_Created_{{ input_os.split(' ')|first }}"
   
-- name: Start post-provisioning tasks for new Windows virtual machine
+- name: Connect to host 
   hosts: "Just_Created_{{ input_os.split(' ')|first }}"
   #become: true
   gather_facts: false
   connection: winrm
   #become_method: runas
+
+  vars:
+    ansible_winrm_server_cert_validate: ignore
+    win_ad_domain_name: "KMHP.COM"
+    win_ad_ou_path: "ou=stig,ou=winservers,ou=Collegeville,ou=datacenters,dc=kmhp,dc=com"
+
+  vars_files:
+     - win_domain_secret.yml
 
   tasks:
   - name: Join Windows domain
