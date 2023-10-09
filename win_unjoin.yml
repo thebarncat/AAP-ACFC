@@ -8,7 +8,8 @@
     - name: Add new host to temporary group in in-memory inventory
       when: input_os.find('Windows') != -1
       ansible.builtin.add_host:
-        host: "{{ my_hostname }}.kmhp.com"
+        #host: "{{ my_hostname }}.kmhp.com"
+        host: cgvx1wuatwe103.kmhp.com
         groups:
           - "Just_Created_{{ input_os.split(' ')|first }}"
   
