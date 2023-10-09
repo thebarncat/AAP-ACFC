@@ -35,5 +35,6 @@
       domain_admin_password: "{{ win_ad_admin_password }}"
       domain_admin_user: "{{ win_ad_admin_user }}"
       domain_ou_path: "{{ win_ad_ou_path }}"
+      workgroup_name: WORKGROUP
       hostname: cgvx1wuatwe103
       state: workgroup
