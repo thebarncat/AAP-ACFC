@@ -1,5 +1,5 @@
 ---
-- name: Unjoin Linux host from domain
+- name: Unjoin from domain and unreg from SAT
   hosts: "{{ my_hostname }}"
   become: true
   gather_facts: false
@@ -13,7 +13,12 @@
       ansible.builtin.command:
         cmd: "adleave --user {{ domain_user }} --remove"
 
-    - name: Ensure centrify package is not installed
-      ansible.builtin.dnf:
-        name: centrifydc
-        state: absent
+    - name: Unregister host from satellite 
+      ansible.builtin.command:
+        cmd: "subscription-manager unregister"
+
+    #JK not really needed since the host will be terminated
+    #- name: Ensure centrify package is not installed
+    #  ansible.builtin.dnf:
+    #    name: centrifydc
+    #    state: absent
