@@ -8,16 +8,18 @@
     - centrify_secret.yml
 
   tasks:
-    # Need to ad check task, using ignore error for now 
+    # Need to add check task, using ignore error for now 
     - name: Ensure host is no longer part of the Centrify domain
       register: adleave_output
       ansible.builtin.command:
         cmd: "adleave --user {{ domain_user }} --remove"
       ignore_errors: yes
 
+    # Need to add check task, using ignore error for now 
     - name: Unregister host from satellite 
       ansible.builtin.command:
         cmd: "subscription-manager unregister"
+      ignore_errors: yes
 
     #JK not really needed since the host will be terminated
     #- name: Ensure centrify package is not installed
