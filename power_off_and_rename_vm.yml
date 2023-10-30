@@ -18,13 +18,12 @@
 
     - name: Ensure VM is powered off in VMWare
       community.vmware.vmware_guest:
-        uuid: "{{ vm_info.instance.config.uuid }}"
+        uuid: "{{ vm_info.instance.hw_product_uuid }}"
         name: "{{ my_hostname }}"
         state: poweredoff
 
-
     - name: Ensure VM is renamed in VMWare
       community.vmware.vmware_guest:
-        uuid: "{{ vm_info.instance.config.uuid }}"
+        uuid: "{{ vm_info.instance.hw_product_uuid }}"
         name: "{{ my_hostname }}_{{ now(false, '%Y%m%d') }}"
         state: present
